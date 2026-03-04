@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:flutter/foundation.dart';
 
 class TextTranslateScreen extends StatefulWidget {
   const TextTranslateScreen({super.key});
@@ -90,6 +93,85 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
     });
   }
 
+  Future<void> pickImageAndExtractText() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile == null) return;
+
+    setState(() {
+      isLoading = true;
+    });
+
+    /// ================= WEB =================
+    if (kIsWeb) {
+      try {
+        var request = http.MultipartRequest(
+          'POST',
+          Uri.parse('https://api.ocr.space/parse/image'),
+        );
+
+        request.fields['apikey'] = 'helloworld';
+        request.fields['language'] = 'eng';
+
+        var bytes = await pickedFile.readAsBytes();
+
+        request.files.add(
+          http.MultipartFile.fromBytes(
+            'file',
+            bytes,
+            filename: pickedFile.name,
+          ),
+        );
+
+        var streamedResponse = await request.send().timeout(
+          const Duration(seconds: 20),
+        );
+
+        var response = await http.Response.fromStream(streamedResponse);
+
+        var jsonData = json.decode(response.body);
+
+        if (jsonData['IsErroredOnProcessing'] == false) {
+          setState(() {
+            controller.text = jsonData['ParsedResults'][0]['ParsedText'] ?? '';
+            isLoading = false;
+          });
+        } else {
+          setState(() {
+            isLoading = false;
+          });
+        }
+      } catch (e) {
+        setState(() {
+          isLoading = false;
+        });
+
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Lỗi Web OCR: $e")));
+      }
+    }
+    /// ================= ANDROID / IOS =================
+    else {
+      final inputImage = InputImage.fromFilePath(pickedFile.path);
+      final textRecognizer = TextRecognizer(
+        script: TextRecognitionScript.latin,
+      );
+
+      final RecognizedText recognizedText = await textRecognizer.processImage(
+        inputImage,
+      );
+
+      setState(() {
+        controller.text = recognizedText.text;
+        isLoading = false;
+      });
+
+      textRecognizer.close();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,6 +194,11 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
               ),
 
               const SizedBox(height: 15),
+              ElevatedButton.icon(
+                onPressed: pickImageAndExtractText,
+                icon: const Icon(Icons.image),
+                label: const Text("Dịch bằng hình ảnh"),
+              ),
 
               /// Language switch
               Row(
