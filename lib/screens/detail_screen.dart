@@ -12,7 +12,16 @@ class DetailScreen extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(word.word),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(word.word),
+              Text(
+                "${word.phonetic} • ${word.type}",
+                style: const TextStyle(fontSize: 14),
+              ),
+            ],
+          ),
           bottom: const TabBar(
             tabs: [
               Tab(text: "ANH - VIỆT"),

@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.grey[300],
 
       appBar: AppBar(
-        backgroundColor: Colors.pink[200],
+        backgroundColor: Colors.blue[700],
         title: const Text("Dictionary App"),
         centerTitle: true,
         actions: [
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return ListTile(
                       title: Text(
                         filteredWords[index].word,
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.black),
                       ),
                       onTap: () {
                         Navigator.push(
