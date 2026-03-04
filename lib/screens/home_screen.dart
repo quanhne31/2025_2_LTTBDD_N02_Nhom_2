@@ -3,6 +3,11 @@ import 'account_screen.dart';
 import 'detail_screen.dart';
 import 'text_translate_screen.dart';
 import 'package:dictionary_app/models/word_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'login_screen.dart';
+import 'your_words_screen.dart';
+import 'history_screen.dart';
+import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +18,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController controller = TextEditingController();
+
+  bool isLoggedIn = false;
+  String? pendingRoute;
+
   List<WordModel> allWords = [
     WordModel(
       word: "eye",
@@ -39,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    checkLogin();
 
     controller.addListener(() {
       setState(() {
@@ -53,11 +63,56 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Future<void> checkLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    });
+  }
+
+  void requireLogin() async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen(loginType: "email")),
+    );
+
+    await checkLogin();
+  }
+
+  Future<void> navigateAfterLogin(String routeName) async {
+    final prefs = await SharedPreferences.getInstance();
+    bool logged = prefs.getBool('isLoggedIn') ?? false;
+
+    if (logged) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const AccountScreen()),
+      );
+    } else {
+      pendingRoute = routeName;
+
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const LoginScreen(loginType: "email"),
+        ),
+      );
+
+      await checkLogin();
+
+      if (isLoggedIn && pendingRoute != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const AccountScreen()),
+        );
+        pendingRoute = null;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
-
       appBar: AppBar(
         backgroundColor: Colors.blue[600],
         title: const Text("Dictionary App"),
@@ -74,7 +129,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -84,12 +138,12 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: TextField(
                   controller: controller,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(Icons.search),
                     hintText: "Tra từ Anh Việt Anh",
                     border: InputBorder.none,
@@ -98,22 +152,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
+
             if (controller.text.isNotEmpty)
               Container(
                 height: 250,
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
-                  color: Colors.blue[600],
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: ListView.builder(
                   itemCount: filteredWords.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(
-                        filteredWords[index].word,
-                        style: const TextStyle(color: Colors.black),
-                      ),
+                      title: Text(filteredWords[index].word),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -128,7 +180,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-            /// MENU ITEMS
             buildMenuItem(
               Icons.description,
               Colors.purple,
@@ -143,9 +194,57 @@ class _HomeScreenState extends State<HomeScreen> {
 
             buildVipCard(),
 
-            buildMenuItem(Icons.star, Colors.orange, "Từ của bạn"),
+            buildMenuItem(
+              Icons.star,
+              Colors.orange,
+              "Từ của bạn",
+              onTap: () async {
+                final prefs = await SharedPreferences.getInstance();
+                bool logged = prefs.getBool('isLoggedIn') ?? false;
 
-            buildMenuItem(Icons.history, Colors.red, "Từ đã tra"),
+                if (!logged) {
+                  bool? result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const LoginScreen(loginType: "email"),
+                    ),
+                  );
+
+                  if (result != true) return;
+                }
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const YourWordsScreen()),
+                );
+              },
+            ),
+
+            buildMenuItem(
+              Icons.history,
+              Colors.red,
+              "Từ đã tra",
+              onTap: () async {
+                final prefs = await SharedPreferences.getInstance();
+                bool logged = prefs.getBool('isLoggedIn') ?? false;
+
+                if (!logged) {
+                  bool? result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const LoginScreen(loginType: "email"),
+                    ),
+                  );
+
+                  if (result != true) return;
+                }
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const HistoryScreen()),
+                );
+              },
+            ),
 
             buildMenuItem(
               Icons.phone_android,
@@ -153,7 +252,19 @@ class _HomeScreenState extends State<HomeScreen> {
               "Phần mềm học tiếng Anh",
             ),
 
-            buildMenuItem(Icons.settings, Colors.blueGrey, "Cài đặt"),
+            buildMenuItem(
+              Icons.settings,
+              Colors.blueGrey,
+              "Cài đặt",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
+              },
+            ),
 
             const SizedBox(height: 20),
           ],
@@ -162,7 +273,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  /// MENU ITEM REUSABLE
   Widget buildMenuItem(
     IconData icon,
     Color color,
@@ -185,17 +295,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  /// VIP CARD (phần đặc biệt có nội dung bên trong)
   Widget buildVipCard() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
+        child: const Padding(
+          padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Row(
                 children: [
                   CircleAvatar(
