@@ -1,7 +1,56 @@
 import 'package:flutter/material.dart';
+import 'account_screen.dart';
+import 'detail_screen.dart';
+import 'package:dictionary_app/models/word_model.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController controller = TextEditingController();
+  List<WordModel> allWords = [
+    WordModel(
+      word: "eye",
+      phonetic: "/aɪ/",
+      type: "noun",
+      meaning: "Mắt",
+      grammar: "Danh từ đếm được",
+      synonyms: ["vision", "sight"],
+      specialty: "Y học",
+    ),
+    WordModel(
+      word: "energy",
+      phonetic: "/ˈenərdʒi/",
+      type: "noun",
+      meaning: "Năng lượng",
+      grammar: "Danh từ không đếm được",
+      synonyms: ["power", "strength"],
+      specialty: "Vật lý",
+    ),
+  ];
+
+  List<WordModel> filteredWords = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller.addListener(() {
+      setState(() {
+        filteredWords = allWords
+            .where(
+              (word) => word.word.toLowerCase().startsWith(
+                controller.text.toLowerCase(),
+              ),
+            )
+            .toList();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,16 +58,18 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.grey[300],
 
       appBar: AppBar(
-        backgroundColor: Colors.blue[800],
-        title: const Text("Dịch Tiếng Anh"),
+        backgroundColor: Colors.pink[200],
+        title: const Text("Dictionary App"),
         centerTitle: true,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Icon(Icons.person, color: Colors.pink[200]),
-            ),
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AccountScreen()),
+              );
+            },
           ),
         ],
       ),
@@ -35,7 +86,8 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(25),
                 ),
-                child: const TextField(
+                child: TextField(
+                  controller: controller,
                   decoration: InputDecoration(
                     icon: Icon(Icons.search),
                     hintText: "Tra từ Anh Việt Anh",
@@ -45,6 +97,35 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            if (controller.text.isNotEmpty)
+              Container(
+                height: 250,
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  color: Colors.blue[700],
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: ListView.builder(
+                  itemCount: filteredWords.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                        filteredWords[index].word,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                DetailScreen(word: filteredWords[index]),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
 
             /// MENU ITEMS
             buildMenuItem(Icons.description, Colors.purple, "Dịch văn bản"),
