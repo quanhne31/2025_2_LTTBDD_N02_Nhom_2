@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'account_screen.dart';
 import 'detail_screen.dart';
+import 'text_translate_screen.dart';
 import 'package:dictionary_app/models/word_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -58,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.grey[300],
 
       appBar: AppBar(
-        backgroundColor: Colors.blue[700],
+        backgroundColor: Colors.blue[600],
         title: const Text("Dictionary App"),
         centerTitle: true,
         actions: [
@@ -102,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 250,
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
-                  color: Colors.blue[700],
+                  color: Colors.blue[600],
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: ListView.builder(
@@ -128,7 +129,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
             /// MENU ITEMS
-            buildMenuItem(Icons.description, Colors.purple, "Dịch văn bản"),
+            buildMenuItem(
+              Icons.description,
+              Colors.purple,
+              "Dịch văn bản",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => TextTranslateScreen()),
+                );
+              },
+            ),
 
             buildVipCard(),
 
@@ -152,7 +163,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   /// MENU ITEM REUSABLE
-  Widget buildMenuItem(IconData icon, Color color, String title) {
+  Widget buildMenuItem(
+    IconData icon,
+    Color color,
+    String title, {
+    VoidCallback? onTap,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Card(
@@ -163,6 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Icon(icon, color: Colors.white),
           ),
           title: Text(title),
+          onTap: onTap,
         ),
       ),
     );
