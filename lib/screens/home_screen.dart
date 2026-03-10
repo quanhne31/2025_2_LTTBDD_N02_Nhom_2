@@ -8,6 +8,8 @@ import 'login_screen.dart';
 import 'your_words_screen.dart';
 import 'history_screen.dart';
 import 'settings_screen.dart';
+import 'sgk_vocab_screen.dart';
+import 'exam_vocab_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -300,12 +302,12 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: const Padding(
-          padding: EdgeInsets.all(16),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   CircleAvatar(
                     backgroundColor: Colors.red,
@@ -315,12 +317,60 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text("Gói từ vựng VIP", style: TextStyle(fontSize: 16)),
                 ],
               ),
-              SizedBox(height: 12),
-              Text("Từ vựng SGK cũ", style: TextStyle(color: Colors.blue)),
-              SizedBox(height: 8),
-              Text("Từ vựng SGK mới", style: TextStyle(color: Colors.blue)),
-              SizedBox(height: 8),
-              Text("Từ vựng luyện thi", style: TextStyle(color: Colors.blue)),
+              const SizedBox(height: 12),
+
+              InkWell(
+                child: const Text(
+                  "Từ vựng SGK cũ",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const SGKVocabScreen(
+                        title: "Từ vựng SGK cũ",
+                        startClass: 3,
+                      ),
+                    ),
+                  );
+                },
+              ),
+
+              const SizedBox(height: 8),
+
+              InkWell(
+                child: const Text(
+                  "Từ vựng SGK mới",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const SGKVocabScreen(
+                        title: "Từ vựng SGK mới",
+                        startClass: 2,
+                      ),
+                    ),
+                  );
+                },
+              ),
+
+              const SizedBox(height: 8),
+
+              InkWell(
+                child: const Text(
+                  "Từ vựng luyện thi",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ExamVocabScreen()),
+                  );
+                },
+              ),
             ],
           ),
         ),
