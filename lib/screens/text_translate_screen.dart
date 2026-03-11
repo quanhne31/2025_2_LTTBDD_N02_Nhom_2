@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:flutter/foundation.dart';
+import '../languages/app_text.dart';
 
 class TextTranslateScreen extends StatefulWidget {
   const TextTranslateScreen({super.key});
@@ -57,7 +58,7 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
     String to = isEnglishToVietnamese ? "vi" : "en";
 
     final url = Uri.parse(
-      "https://api.mymemory.translated.net/get?q=${controller.text}&langpair=$from|$to",
+      "https://api.mymemory.translated.net/get?q=${Uri.encodeComponent(controller.text)}&langpair=$from|$to",
     );
 
     final response = await http.get(url);
@@ -72,7 +73,7 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
       saveHistory("${controller.text} → $result");
     } else {
       setState(() {
-        result = "Lỗi dịch";
+        result = AppText.get("translateError");
         isLoading = false;
       });
     }
@@ -82,7 +83,7 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
     Clipboard.setData(ClipboardData(text: result));
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text("Đã copy")));
+    ).showSnackBar(SnackBar(content: Text(AppText.get("copied"))));
   }
 
   void clearHistory() async {
@@ -147,9 +148,9 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
           isLoading = false;
         });
 
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("Lỗi Web OCR: $e")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("${AppText.get("ocrError")} $e")),
+          );
       }
     }
     /// ================= ANDROID / IOS =================
@@ -175,7 +176,7 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Dịch Văn Bản")),
+      appBar: AppBar(title: Text(AppText.get("translateText"))),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -186,7 +187,7 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
                 controller: controller,
                 maxLines: 4,
                 decoration: InputDecoration(
-                  hintText: "Nhập văn bản để dịch...",
+                  hintText: AppText.get("enterText"),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -197,14 +198,14 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
               ElevatedButton.icon(
                 onPressed: pickImageAndExtractText,
                 icon: const Icon(Icons.image),
-                label: const Text("Dịch bằng hình ảnh"),
+                label: Text(AppText.get("translateImage")),
               ),
 
               /// Language switch
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(isEnglishToVietnamese ? "Anh" : "Việt"),
+                  Text(isEnglishToVietnamese ? AppText.get("english") : AppText.get("vietnamese")),
                   IconButton(
                     icon: const Icon(Icons.swap_horiz),
                     onPressed: () {
@@ -213,7 +214,7 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
                       });
                     },
                   ),
-                  Text(isEnglishToVietnamese ? "Việt" : "Anh"),
+                  Text(isEnglishToVietnamese ? AppText.get("vietnamese") : AppText.get("english")),
                 ],
               ),
 
@@ -222,7 +223,7 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
               /// Translate button
               ElevatedButton(
                 onPressed: translateText,
-                child: const Text("Dịch"),
+                child: Text(AppText.get("translate")),
               ),
 
               const SizedBox(height: 20),
@@ -266,8 +267,7 @@ class _TextTranslateScreenState extends State<TextTranslateScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Lịch sử",
+                        Text(AppText.get("history"),
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

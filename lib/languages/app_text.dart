@@ -28,7 +28,18 @@ class AppText {
       "grade": "Lớp",
       "complete0": "Hoàn thành 0%",
       "practice": "Luyện tập",
+      "translateText": "Dịch văn bản",
+      "enterText": "Nhập văn bản để dịch...",
+      "translateImage": "Dịch bằng hình ảnh",
+      "english": "Anh",
+      "vietnamese": "Việt",
+      "translate": "Dịch",
+      "copied": "Đã copy",
+      "translateError": "Lỗi dịch",
+      "history": "Lịch sử",
+      "ocrError": "Lỗi nhận diện ảnh:"
       },
+
     "en": {
       "settings": "Settings",
       "darkmode": "Dark Mode",
@@ -55,6 +66,16 @@ class AppText {
       "grade": "Grade",
       "complete0": "Completed 0%",
       "practice": "Practice",
+      "translateText": "Text Translation",
+      "enterText": "Enter text to translate...",
+      "translateImage": "Translate from image",
+      "english": "English",
+      "vietnamese": "Vietnamese",
+      "translate": "Translate",
+      "copied": "Copied",
+      "translateError": "Translation error",
+      "history": "History",
+      "ocrError": "OCR Error:"
   };
 
   static String get(String key) {
