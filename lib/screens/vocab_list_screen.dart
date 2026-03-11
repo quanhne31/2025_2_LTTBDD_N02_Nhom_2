@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../languages/app_text.dart';
 
 class VocabListScreen extends StatelessWidget {
   final int grade;
@@ -17,7 +18,7 @@ class VocabListScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lớp $grade - Unit $unit"),
+        title: Text("${AppText.get("grade")} $grade - ${AppText.get("unit")} $unit",),
         backgroundColor: Colors.blue,
       ),
 

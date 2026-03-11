@@ -37,7 +37,14 @@ class AppText {
       "copied": "Đã copy",
       "translateError": "Lỗi dịch",
       "history": "Lịch sử",
-      "ocrError": "Lỗi nhận diện ảnh:"
+      "ocrError": "Lỗi nhận diện ảnh:",
+      "grade": "Lớp",
+      "unit": "Unit",
+      "vipRequired": "Yêu cầu VIP",
+      "vipMessage": "Bạn cần đăng ký VIP để mở Unit này",
+      "ok": "OK",
+      "grade": "Lớp",
+      "unit": "Unit",
       },
 
     "en": {
@@ -75,7 +82,14 @@ class AppText {
       "copied": "Copied",
       "translateError": "Translation error",
       "history": "History",
-      "ocrError": "OCR Error:"
+      "ocrError": "OCR Error:",
+      "grade": "Grade",
+      "unit": "Unit",
+      "vipRequired": "VIP Required",
+      "vipMessage": "You need VIP to unlock this unit",
+      "ok": "OK",
+      "grade": "Grade",
+      "unit": "Unit",
   };
 
   static String get(String key) {
