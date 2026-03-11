@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_screen.dart';
+import '../languages/app_text.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -40,7 +41,7 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Tài khoản")),
+      appBar: AppBar(title: Text(AppText.get("account"))),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: isLoggedIn ? _buildLoggedInView() : _buildLoginView(),
@@ -60,7 +61,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
         const SizedBox(height: 40),
 
-        ElevatedButton(onPressed: logout, child: const Text("Đăng xuất")),
+        ElevatedButton(onPressed: logout, child: Text(AppText.get("logout"))),
       ],
     );
   }
@@ -70,8 +71,8 @@ class _AccountScreenState extends State<AccountScreen> {
       children: [
         const SizedBox(height: 40),
 
-        const Text(
-          "Hãy đăng nhập để backup dữ liệu.",
+        Text(
+          AppText.get("loginHint"),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 16),
         ),
@@ -80,7 +81,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
         _buildButton(
           icon: Icons.email,
-          text: "Đăng nhập bằng Email",
+          text: AppText.get("loginEmail"),
           loginType: "email",
         ),
 
@@ -88,7 +89,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
         _buildButton(
           icon: Icons.apple,
-          text: "Đăng nhập bằng Apple",
+          text: AppText.get("loginApple"),
           loginType: "apple",
         ),
       ],
