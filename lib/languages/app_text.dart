@@ -12,6 +12,14 @@ class AppText {
       "feedback": "Gửi phản hồi",
       "cancel": "Hủy",
       "send": "Gửi",
+      "login": "Đăng nhập",
+      "enterFullInfo": "Vui lòng nhập đầy đủ thông tin",
+      "enterEmailPass": "Nhập Email và mật khẩu",
+      "enterApplePass": "Nhập Apple ID và mật khẩu",
+      "email": "Email",
+      "appleId": "Apple ID",
+      "password": "Mật khẩu",
+      "confirmLogin": "Xác nhận đăng nhập",
       },
     "en": {
       "settings": "Settings",
@@ -23,6 +31,14 @@ class AppText {
       "feedback": "Send Feedback",
       "cancel": "Cancel",
       "send": "Send",},
+      "login": "Login",
+      "enterFullInfo": "Please enter all information",
+      "enterEmailPass": "Enter Email and Password",
+      "enterApplePass": "Enter Apple ID and Password",
+      "email": "Email",
+      "appleId": "Apple ID",
+      "password": "Password",
+      "confirmLogin": "Confirm Login",
   };
 
   static String get(String key) {

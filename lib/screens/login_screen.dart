@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../languages/app_text.dart';
 
 class LoginScreen extends StatefulWidget {
   final String loginType; // nhận từ AccountScreen
@@ -17,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> saveLogin() async {
     if (idController.text.isEmpty || passwordController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Vui lòng nhập đầy đủ thông tin")),
+        SnackBar(content: Text(AppText.get("enterFullInfo"))),
       );
       return;
     }
@@ -35,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Đăng nhập")),
+      appBar: AppBar(title: Text(AppText.get("login"))),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -44,8 +45,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
             Text(
               widget.loginType == "email"
-                  ? "Nhập Email và mật khẩu"
-                  : "Nhập Apple ID và mật khẩu",
+                  ? AppText.get("enterEmailPass")
+                  : AppText.get("enterApplePass")
               style: const TextStyle(fontSize: 16),
             ),
 
@@ -54,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
             TextField(
               controller: idController,
               decoration: InputDecoration(
-                labelText: widget.loginType == "email" ? "Email" : "Apple ID",
+                labelText: widget.loginType == "email" ? AppText.get("email") : AppText.get("appleId"),
               ),
             ),
 
@@ -63,14 +64,14 @@ class _LoginScreenState extends State<LoginScreen> {
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: const InputDecoration(labelText: "Mật khẩu"),
+              InputDecoration(labelText: AppText.get("password")),
             ),
 
             const SizedBox(height: 25),
 
             ElevatedButton(
               onPressed: saveLogin,
-              child: const Text("Xác nhận đăng nhập"),
+              Text(AppText.get("confirmLogin")),
             ),
           ],
         ),
