@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dictionary_app/models/word_model.dart';
+import '../languages/app_text.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -60,10 +61,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Từ đã tra")),
+      appBar: AppBar(title: Text(AppText.get("historyWords"))),
       body: history.isEmpty
-          ? const Center(
-              child: Text("Chưa có từ nào", style: TextStyle(fontSize: 16)),
+          ? Center(
+              child: Text(
+                AppText.get("noWords"),
+                style: TextStyle(fontSize: 16)
+                ),
             )
           : ListView.builder(
               itemCount: history.length,
@@ -73,7 +77,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 try {
                   word = WordModel.fromJson(history[index]);
                 } catch (_) {
-                  return const SizedBox(); // phòng lỗi lần cuối
+                  return const SizedBox();
                 }
 
                 return Card(
@@ -102,7 +106,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       onPressed: () {
                         removeWord(index);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Đã xoá từ")),
+                          SnackBar(content: Text(AppText.get("deletedWord"))),
                         );
                       },
                     ),
