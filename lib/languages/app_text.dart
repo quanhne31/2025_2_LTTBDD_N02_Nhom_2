@@ -72,7 +72,7 @@ class AppText {
       "appName": " Từ điển Anh Việt",
       "aboutContent":
           "Ứng dụng học từ vựng tiếng Anh giúp tra cứu, dịch và luyện tập từ vựng.",
-      "developedBy": "Dự án được phát triển bởi",
+      "developedBy": "Dự án được phát triển bởi Nhóm 2",
       "teacher": "Giảng viên hướng dẫn: Nguyễn Xuân Quế",
       "student1": "Sinh viên: Nguyễn Thị Quỳnh Anh",
       "student2": "Sinh viên: Vương Đức Việt",
@@ -148,7 +148,7 @@ class AppText {
       "appName": "Dictionary App",
       "aboutContent":
           "An English vocabulary learning app for searching, translating and practicing words.",
-      "developedBy": "This project was developed by",
+      "developedBy": "This project was developed by Group 2",
       "teacher": "Instructor: Nguyen Xuan Que",
       "student1": "Student: Nguyen Thi Quynh Anh",
       "student2": "Student: Vuong Duc Viet",

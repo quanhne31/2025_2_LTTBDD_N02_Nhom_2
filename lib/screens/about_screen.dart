@@ -7,7 +7,7 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppText.get("about")), centerTitle: true),
+      appBar: AppBar(title: Text(AppText.get("about"))),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -65,7 +65,7 @@ class AboutScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.person),
+                    const Icon(Icons.person_outline),
                     const SizedBox(width: 10),
                     Text(AppText.get("student1")),
                   ],
