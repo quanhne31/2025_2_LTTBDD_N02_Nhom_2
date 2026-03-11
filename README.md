@@ -9,7 +9,48 @@ Dự án được xây dựng nhằm hỗ trợ người học tiếng Anh tra c
 ---
 
 ## 🔗 Demo
+## 📸 Giao diện Ứng dụng
 
+<table>
+<tr>
+<td align="center"><b>Trang chủ</b></td>
+<td align="center"><b>Trang đăng nhập</b></td>
+<td align="center"><b>Giao diện đăng nhập</b></td>
+<td align="center"><b>Tra từ</b></td>
+</tr>
+<tr>
+<td><img src="screenshots/trangchu.jpg" width="220"></td>
+<td><img src="screenshots/trangdangnhap.jpg" width="220"></td>
+<td><img src="screenshots/giaodiendangnhap.jpg" width="220"></td>
+<td><img src="screenshots/tratu.jpg" width="220"></td>
+</tr>
+
+<tr>
+<td align="center"><b>Dịch văn bản</b></td>
+<td align="center"><b>Từ vựng SGK cũ</b></td>
+<td align="center"><b>Từ vựng SGK mới</b></td>
+<td align="center"><b>Từ vựng luyện thi</b></td>
+</tr>
+<tr>
+<td><img src="screenshots/dichvanban.jpg" width="220"></td>
+<td><img src="screenshots/tuvungSGKcu.jpg" width="220"></td>
+<td><img src="screenshots/tuvungSGKmoi.jpg" width="220"></td>
+<td><img src="screenshots/tuvungluyenthi.jpg" width="220"></td>
+</tr>
+
+<tr>
+<td align="center"><b>Từ của bạn</b></td>
+<td align="center"><b>Từ đã tra</b></td>
+<td align="center"><b>Cài đặt</b></td>
+<td align="center"><b>Về chúng tôi</b></td>
+</tr>
+<tr>
+<td><img src="screenshots/tucuaban.jpg" width="220"></td>
+<td><img src="screenshots/tudatra.jpg" width="220"></td>
+<td><img src="screenshots/caidat.jpg" width="220"></td>
+<td><img src="screenshots/vechungtoi.jpg" width="220"></td>
+</tr>
+</table>
 
 
 ---
