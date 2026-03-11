@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Text(
               widget.loginType == "email"
                   ? AppText.get("enterEmailPass")
-                  : AppText.get("enterApplePass")
+                  : AppText.get("enterApplePass"),
               style: const TextStyle(fontSize: 16),
             ),
 
@@ -64,14 +64,14 @@ class _LoginScreenState extends State<LoginScreen> {
             TextField(
               controller: passwordController,
               obscureText: true,
-              InputDecoration(labelText: AppText.get("password")),
+              decoration: InputDecoration(labelText: AppText.get("password")),
             ),
 
             const SizedBox(height: 25),
 
             ElevatedButton(
               onPressed: saveLogin,
-              Text(AppText.get("confirmLogin")),
+              child: Text(AppText.get("confirmLogin")),
             ),
           ],
         ),
