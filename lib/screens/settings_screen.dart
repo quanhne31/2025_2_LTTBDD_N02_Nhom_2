@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
 import '../languages/app_text.dart';
+import 'about_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -199,6 +200,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 );
               }),
             ),
+          ),
+
+          /// VỀ CHÚNG TÔI
+          ListTile(
+            leading: const Icon(Icons.info),
+            title: Text(AppText.get("about")),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutScreen()),
+              );
+            },
           ),
         ],
       ),
