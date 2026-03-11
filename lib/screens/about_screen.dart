@@ -21,10 +21,10 @@ class AboutScreen extends StatelessWidget {
             /// TÊN APP
             Text(
               AppText.get("appName"),
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 15),
 
             /// MÔ TẢ
             Text(
@@ -33,48 +33,53 @@ class AboutScreen extends StatelessWidget {
               style: const TextStyle(fontSize: 16),
             ),
 
+            const SizedBox(height: 15),
+
+            /// DỰ ÁN ĐƯỢC PHÁT TRIỂN BỞI
+            Text(
+              AppText.get("developedBy"),
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 16),
+            ),
+
             const SizedBox(height: 30),
 
-            /// CARD THÔNG TIN
-            Card(
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
+            /// GIẢNG VIÊN
+            Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.school),
+                  const SizedBox(width: 10),
+                  Text(AppText.get("teacher")),
+                ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
+            ),
+
+            const SizedBox(height: 10),
+
+            /// SINH VIÊN
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.group),
-                        const SizedBox(width: 10),
-                        Text(AppText.get("team")),
-                      ],
-                    ),
-
-                    const SizedBox(height: 10),
-
-                    Row(
-                      children: [
-                        const Icon(Icons.code),
-                        const SizedBox(width: 10),
-                        const Text("Flutter"),
-                      ],
-                    ),
-
-                    const SizedBox(height: 10),
-
-                    Row(
-                      children: [
-                        const Icon(Icons.update),
-                        const SizedBox(width: 10),
-                        const Text("Version 1.0"),
-                      ],
-                    ),
+                    const Icon(Icons.person),
+                    const SizedBox(width: 10),
+                    Text(AppText.get("student1")),
                   ],
                 ),
-              ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.person_outline),
+                    const SizedBox(width: 10),
+                    Text(AppText.get("student2")),
+                  ],
+                ),
+              ],
             ),
 
             const Spacer(),

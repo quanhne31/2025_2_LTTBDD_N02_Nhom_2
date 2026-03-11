@@ -69,6 +69,13 @@ class AppText {
       "oldTextbookVocab": "Từ vựng SGK cũ",
       "newTextbookVocab": "Từ vựng SGK mới",
       "appTitle": "Từ điển Anh Việt",
+      "appName": " Từ điển Anh Việt",
+      "aboutContent":
+          "Ứng dụng học từ vựng tiếng Anh giúp tra cứu, dịch và luyện tập từ vựng.",
+      "developedBy": "Dự án được phát triển bởi",
+      "teacher": "Giảng viên hướng dẫn: Nguyễn Xuân Quế",
+      "student1": "Sinh viên: Nguyễn Thị Quỳnh Anh",
+      "student2": "Sinh viên: Vương Đức Việt",
       },
 
     "en": {
@@ -138,6 +145,13 @@ class AppText {
       "oldTextbookVocab": "Old Textbook Vocabulary",
       "newTextbookVocab": "New Textbook Vocabulary",
       "appTitle": "Dictionary App",
+      "appName": "Dictionary App",
+      "aboutContent":
+          "An English vocabulary learning app for searching, translating and practicing words.",
+      "developedBy": "This project was developed by",
+      "teacher": "Instructor: Nguyen Xuan Que",
+      "student1": "Student: Nguyen Thi Quynh Anh",
+      "student2": "Student: Vuong Duc Viet",
     },
   };
 
