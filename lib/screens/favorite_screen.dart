@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/word_model.dart';
 import 'detail_screen.dart';
+import '../languages/app_text.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -41,9 +42,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Từ của bạn")),
+      appBar: AppBar(title: Text(AppText.get("yourWords"))),
       body: favorites.isEmpty
-          ? const Center(child: Text("Chưa có từ nào"))
+          ? Center(child: Text(AppText.get("noWords")))
           : ListView.builder(
               itemCount: favorites.length,
               itemBuilder: (context, index) {
