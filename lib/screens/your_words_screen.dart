@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dictionary_app/models/word_model.dart';
+import '../languages/app_text.dart';
 
 class YourWordsScreen extends StatefulWidget {
   const YourWordsScreen({super.key});
@@ -36,9 +37,9 @@ class _YourWordsScreenState extends State<YourWordsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Từ của bạn")),
+      appBar: AppBar(title: Text(AppText.get("yourWords")),),
       body: favorites.isEmpty
-          ? const Center(child: Text("Chưa có từ nào"))
+          ? Center(child: Text(AppText.get("noWords")))
           : ListView.builder(
               itemCount: favorites.length,
               itemBuilder: (context, index) {
@@ -72,7 +73,7 @@ class _YourWordsScreenState extends State<YourWordsScreen> {
                       onPressed: () {
                         removeWord(index);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Đã xoá từ")),
+                          SnackBar(content: Text(AppText.get("deletedWord"))),
                         );
                       },
                     ),
