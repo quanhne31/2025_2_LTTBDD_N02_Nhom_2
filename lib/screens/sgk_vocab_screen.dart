@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'unit_screen.dart'; // thêm dòng này
+import 'unit_screen.dart';
+import '../languages/app_text.dart';
 
 class SGKVocabScreen extends StatelessWidget {
   final String title;
@@ -26,8 +27,8 @@ class SGKVocabScreen extends StatelessWidget {
             margin: const EdgeInsets.all(10),
             child: ListTile(
               leading: const Icon(Icons.school),
-              title: Text("Lớp $grade"),
-              subtitle: const Text("Hoàn thành 0%"),
+              title: Text("${AppText.get("grade")} $grade"),
+              subtitle: Text(AppText.get("complete0")),
               trailing: ElevatedButton(
                 onPressed: () {
                   /// mở danh sách Unit của lớp
@@ -36,7 +37,7 @@ class SGKVocabScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (_) => UnitScreen(grade: grade)),
                   );
                 },
-                child: const Text("Luyện tập"),
+                child: Text(AppText.get("practice")),
               ),
             ),
           );

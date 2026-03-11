@@ -25,6 +25,9 @@ class AppText {
       "chooseLang": "Chọn ngôn ngữ",
       "sent": "Đã gửi phản hồi tới nhà phát hành",
       "thanksHigh": "Cảm ơn bạn đã đánh giá cao ❤️",
+      "grade": "Lớp",
+      "complete0": "Hoàn thành 0%",
+      "practice": "Luyện tập",
       },
     "en": {
       "settings": "Settings",
@@ -49,6 +52,9 @@ class AppText {
       "chooseLang": "Choose Language",
       "sent": "Feedback sent to developer",
       "thanksHigh": "Thank you for the high rating ❤️",
+      "grade": "Grade",
+      "complete0": "Completed 0%",
+      "practice": "Practice",
   };
 
   static String get(String key) {
