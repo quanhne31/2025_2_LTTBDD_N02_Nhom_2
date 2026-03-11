@@ -250,12 +250,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             buildMenuItem(
-              Icons.phone_android,
-              Colors.blue,
-              AppText.get("englishSoftware"),
-            ),
-
-            buildMenuItem(
               Icons.settings,
               Colors.blueGrey,
               AppText.get("settings"),
