@@ -10,6 +10,7 @@ import 'history_screen.dart';
 import 'settings_screen.dart';
 import 'sgk_vocab_screen.dart';
 import 'exam_vocab_screen.dart';
+import '../languages/app_text.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -117,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[600],
-        title: const Text("Dictionary App"),
+        title: Text(AppText.get("appTitle")),
         centerTitle: true,
         actions: [
           IconButton(
@@ -145,9 +146,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: TextField(
                   controller: controller,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     icon: Icon(Icons.search),
-                    hintText: "Tra từ Anh Việt Anh",
+                    hintText: AppText.get("searchHint"),
                     border: InputBorder.none,
                     suffixIcon: Icon(Icons.mic),
                   ),
@@ -185,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
             buildMenuItem(
               Icons.description,
               Colors.purple,
-              "Dịch văn bản",
+              AppText.get("textTranslate"),
               onTap: () {
                 Navigator.push(
                   context,
@@ -199,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
             buildMenuItem(
               Icons.star,
               Colors.orange,
-              "Từ của bạn",
+              AppText.get("yourWords"),
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
                 bool logged = prefs.getBool('isLoggedIn') ?? false;
@@ -225,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
             buildMenuItem(
               Icons.history,
               Colors.red,
-              "Từ đã tra",
+              AppText.get("historyWords"),
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
                 bool logged = prefs.getBool('isLoggedIn') ?? false;
@@ -251,13 +252,13 @@ class _HomeScreenState extends State<HomeScreen> {
             buildMenuItem(
               Icons.phone_android,
               Colors.blue,
-              "Phần mềm học tiếng Anh",
+              AppText.get("englishSoftware"),
             ),
 
             buildMenuItem(
               Icons.settings,
               Colors.blueGrey,
-              "Cài đặt",
+              AppText.get("settings"),
               onTap: () {
                 Navigator.push(
                   context,
@@ -307,29 +308,29 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 children: [
                   CircleAvatar(
                     backgroundColor: Colors.red,
                     child: Icon(Icons.card_giftcard, color: Colors.white),
                   ),
                   SizedBox(width: 12),
-                  Text("Gói từ vựng VIP", style: TextStyle(fontSize: 16)),
+                  Text(AppText.get("vipVocab"), style: TextStyle(fontSize: 16)),
                 ],
               ),
               const SizedBox(height: 12),
 
               InkWell(
-                child: const Text(
-                  "Từ vựng SGK cũ",
+                child: Text(
+                  AppText.get("oldTextbookVocab"),
                   style: TextStyle(color: Colors.blue),
                 ),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const SGKVocabScreen(
-                        title: "Từ vựng SGK cũ",
+                      builder: (_) => SGKVocabScreen(
+                        title: AppText.get("oldTextbookVocab"),
                         startClass: 3,
                       ),
                     ),
@@ -340,16 +341,16 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8),
 
               InkWell(
-                child: const Text(
-                  "Từ vựng SGK mới",
+                child: Text(
+                  AppText.get("newTextbookVocab"),
                   style: TextStyle(color: Colors.blue),
                 ),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const SGKVocabScreen(
-                        title: "Từ vựng SGK mới",
+                      builder: (_) => SGKVocabScreen(
+                        title: AppText.get("newTextbookVocab"),
                         startClass: 2,
                       ),
                     ),
@@ -360,8 +361,8 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8),
 
               InkWell(
-                child: const Text(
-                  "Từ vựng luyện thi",
+                child: Text(
+                  AppText.get("examVocab"),
                   style: TextStyle(color: Colors.blue),
                 ),
                 onTap: () {
