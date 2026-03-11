@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'exam_list_screen.dart';
+import '../languages/app_text.dart';
 
 class ExamVocabScreen extends StatelessWidget {
   const ExamVocabScreen({super.key});
@@ -8,13 +9,13 @@ class ExamVocabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Từ vựng luyện thi"),
+        title: Text(AppText.get("examVocab")),
         backgroundColor: Colors.blue,
       ),
       body: ListView(
         children: [
           ListTile(
-            title: const Text("Oxford 3000"),
+            title: Text(AppText.get("oxford3000")),
             onTap: () {
               Navigator.push(
                 context,
@@ -26,7 +27,7 @@ class ExamVocabScreen extends StatelessWidget {
           ),
 
           ListTile(
-            title: const Text("TOEIC 600"),
+            title: Text(AppText.get("toeic600")),
             onTap: () {
               Navigator.push(
                 context,
@@ -38,7 +39,7 @@ class ExamVocabScreen extends StatelessWidget {
           ),
 
           ListTile(
-            title: const Text("IELTS Vocabulary"),
+            title: Text(AppText.get("ieltsVocab")),
             onTap: () {
               Navigator.push(
                 context,
