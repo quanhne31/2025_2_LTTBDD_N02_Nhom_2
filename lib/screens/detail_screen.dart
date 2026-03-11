@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dictionary_app/models/word_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../languages/app_text.dart';
 
 class DetailScreen extends StatefulWidget {
   final WordModel word;
@@ -73,7 +74,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text("Đã thêm vào Từ của bạn")));
+      ).showSnackBar(SnackBar(content: Text(AppText.get("addedFavorite"))));
     }
   }
 
@@ -107,12 +108,12 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
           ],
 
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
-              Tab(text: "ANH - VIỆT"),
-              Tab(text: "NGỮ PHÁP"),
-              Tab(text: "ANH - ANH"),
-              Tab(text: "CHUYÊN NGÀNH"),
+              Tab(text: AppText.get("tabEnVi")),
+              Tab(text: AppText.get("tabGrammar")),
+              Tab(text: AppText.get("tabEnEn")),
+              Tab(text: AppText.get("tabSpecial")),
             ],
           ),
         ),
