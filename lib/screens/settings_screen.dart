@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
+import '../languages/app_text.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -39,12 +40,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Cài đặt")),
+      appBar: AppBar(title: Text(AppText.get("settings"))),
       body: ListView(
         children: [
-          /// 🌙 DARK MODE
+          /// DARK MODE
           SwitchListTile(
-            title: const Text("Chế độ tối"),
+            title: Text(AppText.get("darkmode")),
             value: isDark,
             onChanged: (value) {
               setState(() => isDark = value);
@@ -54,10 +55,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           const Divider(),
 
-          /// 📧 EMAIL PHẢN HỒI
+          /// NGÔN NGỮ
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: Text(AppText.get("language")),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(AppText.get("chooseLang")),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          title: Text(AppText.get("vietnamese")),
+                          onTap: () {
+                            MyApp.of(context)?.changeLanguage("vi");
+                            AppText.currentLang = "vi";
+                            setState(() {});
+                            Navigator.pop(context);
+                          },
+                        ),
+                        ListTile(
+                          title: Text(AppText.get("english")),
+                          onTap: () {
+                            MyApp.of(context)?.changeLanguage("en");
+                            AppText.currentLang = "en";
+                            setState(() {});
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+
+          const Divider(),
+
+          /// EMAIL PHẢN HỒI
           ListTile(
             leading: const Icon(Icons.email),
-            title: const Text("Email phản hồi"),
+            title: Text(AppText.get("email")),
             onTap: () {
               showDialog(
                 context: context,
@@ -65,30 +107,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   TextEditingController controller = TextEditingController();
 
                   return AlertDialog(
-                    title: const Text("Gửi phản hồi"),
+                    title: Text(AppText.get("feedback")),
                     content: TextField(
                       controller: controller,
                       maxLines: 4,
-                      decoration: const InputDecoration(
-                        hintText: "Nhập nội dung phản hồi...",
+                      decoration: InputDecoration(
+                        hintText: AppText.get("feedbackHint"),
                         border: OutlineInputBorder(),
                       ),
                     ),
                     actions: [
                       TextButton(
-                        child: const Text("Hủy"),
+                        child: Text(AppText.get("cancel")),
                         onPressed: () => Navigator.pop(context),
                       ),
                       ElevatedButton(
-                        child: const Text("Gửi"),
+                        child: Text(AppText.get("send")),
                         onPressed: () {
                           Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                "Đã gửi phản hồi tới nhà phát hành",
-                              ),
-                            ),
+                            SnackBar(content: Text(AppText.get("sent"))),
                           );
                         },
                       ),
@@ -101,9 +139,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           const Divider(),
 
-          /// ⭐ ĐÁNH GIÁ THÔNG MINH
+          /// ĐÁNH GIÁ THÔNG MINH
           ListTile(
-            title: const Text("Đánh giá ứng dụng"),
+            title: Text(AppText.get("rating")),
             subtitle: Row(
               children: List.generate(5, (index) {
                 return IconButton(
@@ -117,9 +155,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                     if (newRating >= 4) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Cảm ơn bạn đã đánh giá cao ❤️"),
-                        ),
+                        SnackBar(content: Text(AppText.get("thanksHigh"))),
                       );
                     } else {
                       showDialog(
@@ -129,27 +165,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               TextEditingController();
 
                           return AlertDialog(
-                            title: const Text("Bạn chưa hài lòng?"),
+                            title: Text(AppText.get("notHappy")),
                             content: TextField(
                               controller: reasonController,
                               maxLines: 3,
-                              decoration: const InputDecoration(
-                                hintText: "Hãy cho chúng tôi biết lý do...",
+                              decoration: InputDecoration(
+                                hintText: AppText.get("reasonHint"),
                                 border: OutlineInputBorder(),
                               ),
                             ),
                             actions: [
                               TextButton(
-                                child: const Text("Bỏ qua"),
+                                child: Text(AppText.get("cancel")),
                                 onPressed: () => Navigator.pop(context),
                               ),
                               ElevatedButton(
-                                child: const Text("Gửi"),
+                                child: Text(AppText.get("send")),
                                 onPressed: () {
                                   Navigator.pop(context);
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text("Cảm ơn phản hồi của bạn!"),
+                                    SnackBar(
+                                      content: Text(AppText.get("thanks")),
                                     ),
                                   );
                                 },

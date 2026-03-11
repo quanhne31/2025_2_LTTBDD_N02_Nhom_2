@@ -20,6 +20,11 @@ class AppText {
       "appleId": "Apple ID",
       "password": "Mật khẩu",
       "confirmLogin": "Xác nhận đăng nhập",
+      "notHappy": "Bạn chưa hài lòng?",
+      "thanks": "Cảm ơn phản hồi của bạn!",
+      "chooseLang": "Chọn ngôn ngữ",
+      "sent": "Đã gửi phản hồi tới nhà phát hành",
+      "thanksHigh": "Cảm ơn bạn đã đánh giá cao ❤️",
       },
     "en": {
       "settings": "Settings",
@@ -39,6 +44,11 @@ class AppText {
       "appleId": "Apple ID",
       "password": "Password",
       "confirmLogin": "Confirm Login",
+      "notHappy": "Not satisfied?",
+      "thanks": "Thank you for your feedback!",
+      "chooseLang": "Choose Language",
+      "sent": "Feedback sent to developer",
+      "thanksHigh": "Thank you for the high rating ❤️",
   };
 
   static String get(String key) {
