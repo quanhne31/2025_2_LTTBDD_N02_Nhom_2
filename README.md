@@ -8,7 +8,10 @@ Dự án được xây dựng nhằm hỗ trợ người học tiếng Anh tra c
 
 ---
 
-## 🔗 Demo
+## 🔗 [Demo](https://drive.google.com/file/d/1SGxGUEimn73sfdP_k6DhSDFiv7Uu--Sr/view?usp=sharing)
+
+---
+
 ## 📸 Giao diện Ứng dụng
 
 <table>
@@ -55,14 +58,6 @@ Dự án được xây dựng nhằm hỗ trợ người học tiếng Anh tra c
 
 ---
 
-## 📸 Giao diện & Tính năng
-Ứng dụng được thiết kế với giao diện hiện đại, trực quan và tối ưu cho trải nghiệm người dùng trên thiết bị di động. 
-Các màn hình được xây dựng bằng Flutter với bố cục rõ ràng, dễ thao tác và đảm bảo tính nhất quán trong toàn bộ ứng dụng.
-
-
-
----
-
 ## 🌟 Tính năng chính
 
 ### 🔎 Tra cứu từ vựng
@@ -78,8 +73,6 @@ Kết quả tra cứu hiển thị nhiều thông tin bao gồm:
 
 Tính năng này giúp người học hiểu rõ nghĩa và cách sử dụng từ trong nhiều ngữ cảnh khác nhau.
 
----
-
 ### 🌐 Dịch văn bản
 
 Ứng dụng hỗ trợ dịch nội dung với hai hình thức:
@@ -91,8 +84,6 @@ Người dùng có thể nhập một đoạn văn bản để dịch giữa cá
 Người dùng có thể chụp hoặc tải lên hình ảnh chứa văn bản để hệ thống nhận diện và dịch nội dung trong ảnh.
 
 Tính năng này giúp người dùng dịch nhanh nội dung trong học tập và đời sống.
-
----
 
 ### 💎 Gói từ vựng VIP
 
@@ -106,8 +97,6 @@ Các gói từ vựng bao gồm:
 
 Những gói từ này hỗ trợ người học ôn tập từ vựng theo chương trình học hoặc mục tiêu thi cử.
 
----
-
 ### ⭐ Từ của bạn
 
 Màn hình **Từ của bạn** cho phép người dùng lưu lại các từ vựng quan trọng bằng cách đánh dấu yêu thích.
@@ -120,8 +109,6 @@ Người dùng có thể:
 
 ⚠️ Tính năng này yêu cầu **người dùng đăng nhập** trước khi sử dụng.
 
----
-
 ### 📜 Từ đã tra
 
 Ứng dụng lưu lại **lịch sử các từ đã tra cứu** của người dùng.
@@ -133,19 +120,17 @@ Người dùng có thể:
 
 ⚠️ Tính năng này yêu cầu **đăng nhập** để sử dụng.
 
----
-
 ### ⚙️ Cài đặt
 
 Màn hình cài đặt cho phép người dùng tùy chỉnh và quản lý ứng dụng.
 
 Các tùy chọn bao gồm:
 
-- 🌙 Chế độ **Sáng / Tối**
-- 🌍 Chuyển đổi **ngôn ngữ (Tiếng Việt / English)**
-- 📧 Gửi **email phản hồi**
-- ⭐ **Đánh giá ứng dụng**
-- ℹ️ Trang **Về chúng tôi**
+- 🌙 Chế độ Sáng / Tối
+- 🌍 Chuyển đổi ngôn ngữ (Tiếng Việt / English)
+- 📧 Gửi email phản hồi
+- ⭐ Đánh giá ứng dụng
+- ℹ️ Trang Về chúng tôi
 
 ---
 
@@ -154,11 +139,13 @@ Các tùy chọn bao gồm:
 * **Framework:** Flutter 3.x  
 * **Ngôn ngữ:** Dart  
 * **UI Framework:** Material Design (Flutter Material Widgets)  
-* **State Management:** setState  
-* **Lưu trữ cục bộ:** SharedPreferences  
-* **Quản lý dữ liệu:** Model JSON (`WordModel`)  
-* **Đa ngôn ngữ:** Custom Localization (`AppText`)  
-* **Xử lý hình ảnh:** Flutter Image Picker / Camera (dùng cho dịch hình ảnh)
+* **Quản lý trạng thái:** setState  
+* **Giao tiếp API:** HTTP package (dùng để gửi yêu cầu đến API dịch văn bản)
+* **Lưu trữ dữ liệu cục bộ:** SharedPreferences  
+* **Quản lý dữ liệu:** JSON Model 
+* **Đa ngôn ngữ:** Flutter Localization kết hợp với thư viện Intl
+* **Chọn hình ảnh từ thiết bị:** Image Picker
+* **Nhận dạng văn bản từ hình ảnh:** Google ML Kit Text Recognition
 
 ---
 
@@ -168,7 +155,7 @@ Các tùy chọn bao gồm:
 
 ```bash
 git clone https://github.com/quanhne31/2025_2_LTTBDD_N02_Nhom_2
-cd 2025_2_LTTBDD_N02_Nhom_2
+cd dictionary_app
 ```
 
 ### 2️⃣ Cài dependencies
@@ -253,6 +240,5 @@ dictionary_app/
 
 ## 📬 Liên hệ
 
-**Email:**  
-
-**GitHub:**  https://github.com/quanhne31/2025_2_LTTBDD_N02_Nhom_2
+- **Email:**  <23010147@st.phenikaa-uni.edu.vn> & <23010589@st.phenikaa-uni.edu.vn>
+- **GitHub:**  https://github.com/quanhne31/2025_2_LTTBDD_N02_Nhom_2
